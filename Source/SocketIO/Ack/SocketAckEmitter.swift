@@ -28,7 +28,7 @@ import Foundation
 /// A class that represents a waiting ack call.
 ///
 /// **NOTE**: You should not store this beyond the life of the event handler.
-@bjc
+@objc
 public final class SocketAckEmitter : NSObject {
     private unowned let socket: SocketIOClient
     private let ackNum: Int
