@@ -45,6 +45,7 @@ import Foundation
 ///
 /// **NOTE**: The manager is not thread/queue safe, all interaction with the manager should be done on the `handleQueue`
 ///
+@objc
 open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDataBufferable, ConfigSettable {
     private static let logType = "SocketManager"
 
@@ -180,6 +181,8 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// Connects the underlying transport and the default namespace socket.
     ///
     /// Override if you wish to attach a custom `SocketEngineSpec`.
+
+    @objc
     open func connect() {
         guard !status.active else {
             DefaultSocketLogger.Logger.log("Tried connecting an already active socket", type: SocketManager.logType)
@@ -221,6 +224,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     }
 
     /// Disconnects the manager and all associated sockets.
+    @objc
     open func disconnect() {
         DefaultSocketLogger.Logger.log("Manager closing", type: SocketManager.logType)
 
