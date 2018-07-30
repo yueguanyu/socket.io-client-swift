@@ -31,6 +31,8 @@ import Foundation
 /// ```swift
 /// socket.rawEmitView.emit("myEvent", myObject)
 /// ```
+
+@objc(SocketRawView)
 public final class SocketRawView : NSObject {
     private unowned let socket: SocketIOClient
 

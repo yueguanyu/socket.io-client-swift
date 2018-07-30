@@ -28,7 +28,7 @@ import Foundation
 /// A class that represents a waiting ack call.
 ///
 /// **NOTE**: You should not store this beyond the life of the event handler.
-@objc
+@objc(SocketAckEmitter)
 public final class SocketAckEmitter : NSObject {
     private unowned let socket: SocketIOClient
     private let ackNum: Int
@@ -102,7 +102,7 @@ public final class SocketAckEmitter : NSObject {
 ///     ...
 /// }
 /// ```
-@objc
+@objc(OnAckCallback)
 public final class OnAckCallback : NSObject {
     private let ackNumber: Int
     private let binary: Bool

@@ -45,7 +45,7 @@ import Foundation
 ///
 /// **NOTE**: The manager is not thread/queue safe, all interaction with the manager should be done on the `handleQueue`
 ///
-@objc
+@objc(SocketManager)
 open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDataBufferable, ConfigSettable {
     private static let logType = "SocketManager"
 
