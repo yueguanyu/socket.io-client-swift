@@ -202,6 +202,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// Connects a socket through this manager's engine.
     ///
     /// - parameter socket: The socket who we should connect through this manager.
+    @objc
     open func connectSocket(_ socket: SocketIOClient) {
         guard status == .connected else {
             DefaultSocketLogger.Logger.log("Tried connecting socket when engine isn't open. Connecting",
@@ -239,6 +240,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// releasing.
     ///
     /// - parameter socket: The socket to disconnect.
+    @objc
     open func disconnectSocket(_ socket: SocketIOClient) {
         engine?.send("1\(socket.nsp),", withData: [])
 
@@ -251,6 +253,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// releasing.
     ///
     /// - parameter nsp: The namespace to disconnect from.
+    @objc
     open func disconnectSocket(forNamespace nsp: String) {
         guard let socket = nsps.removeValue(forKey: nsp) else {
             DefaultSocketLogger.Logger.log("Could not find socket for \(nsp) to disconnect",
@@ -265,6 +268,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// Sends a client event to all sockets in `nsps`
     ///
     /// - parameter clientEvent: The event to emit.
+    @objc
     open func emitAll(clientEvent event: SocketClientEvent, data: [Any]) {
         forAll {socket in
             socket.handleClientEvent(event, data: data)
@@ -275,6 +279,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     ///
     /// - parameter event: The event to send.
     /// - parameter items: The data to send with this event.
+    @objc
     open func emitAll(_ event: String, _ items: SocketData...) {
         guard let emitData = try? items.map({ try $0.socketRepresentation() }) else {
             DefaultSocketLogger.Logger.error("Error creating socketRepresentation for emit: \(event), \(items)",
@@ -521,6 +526,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     ///
     /// - parameter nsp: The namespace for the socket.
     /// - returns: A `SocketIOClient` for the given namespace.
+    @objc
     open func socket(forNamespace nsp: String) -> SocketIOClient {
         assert(nsp.hasPrefix("/"), "forNamespace must have a leading /")
 
