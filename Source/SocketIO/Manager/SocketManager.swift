@@ -268,7 +268,6 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// Sends a client event to all sockets in `nsps`
     ///
     /// - parameter clientEvent: The event to emit.
-    @objc
     open func emitAll(clientEvent event: SocketClientEvent, data: [Any]) {
         forAll {socket in
             socket.handleClientEvent(event, data: data)
@@ -279,7 +278,6 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     ///
     /// - parameter event: The event to send.
     /// - parameter items: The data to send with this event.
-    @objc
     open func emitAll(_ event: String, _ items: SocketData...) {
         guard let emitData = try? items.map({ try $0.socketRepresentation() }) else {
             DefaultSocketLogger.Logger.error("Error creating socketRepresentation for emit: \(event), \(items)",
